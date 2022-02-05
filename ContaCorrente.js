@@ -1,23 +1,41 @@
+import { Cliente } from "./Cliente.js";
+
 export class ContaCorrente{
-    cliente;
-    conta;
-    agencia;
-    saldo;
+    
+    constructor(cliente,conta,agencia,saldo){
+        this._cliente=cliente;
+        this.conta=conta;
+        this.agencia=agencia;
+        this._saldo=saldo;
+    }
+    set cliente(novoValor){ //O assessor set serve para encapsular melhor um objeto privado
+        if(novoValor instanceof Cliente){//esse condicional não permite que o um valor desconhecido seja atribuido ao objeto
+            this._cliente=novoValor;
+        }
+        
+    }
+    get cliente(){// já o assessor get retorna o valor do cliente. Não podemos manipular as informações.
+        return this._cliente;
+    }
+    get saldo(){
+        return this._saldo;
+    }
+   
 
     depositar(valor){
         if(valor <= 0){
            return console.log("procedimento invalido");
         }else{
-           const valorDeposito = this.saldo+=valor;
+           const valorDeposito = this._saldo+=valor;
             return valorDeposito;
         }
     }
      //agora, vamos criar o método "sacar"
      saque(valor){ 
-        if(this.saldo < valor){
-            return console.log(`Saldo insuficiente \n Saldo atual ${this.saldo}`);
+        if(this._saldo < valor){
+            return console.log(`Saldo insuficiente \n Saldo atual ${this._saldo}`);
         }else {
-           this.saldo-=valor;
+           this._saldo-=valor;
            return valor;
    
        }  
