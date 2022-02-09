@@ -1,3 +1,4 @@
+//Classe abstrata. A classe que foi feita apenas para ser herdada para outras classes
 import { Cliente } from "./Cliente.js";
 export class Conta{
     constructor(saldoInicial,cliente,agencia, conta){
@@ -5,6 +6,11 @@ export class Conta{
         this._cliente=cliente;
         this._agencia=agencia;
         this._conta=conta;
+        console.log(this.constructor);
+        if(this.constructor==Conta){
+            throw new console.error("Você não deveria instanciar um objeto do tipo conta");
+            //eu forcei um erro aqui caso alguem queira instanciar a classe Conta diretamente
+        }
     }
     set cliente(novoValor){ //O assessor set serve para encapsular melhor um objeto privado
         if(novoValor instanceof Cliente){//esse condicional não permite que o um valor desconhecido seja atribuido ao objeto
